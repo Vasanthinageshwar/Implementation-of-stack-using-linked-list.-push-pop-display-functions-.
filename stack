@@ -1,0 +1,100 @@
+Implementation of stack using linked list.(push ,pop ,display
+functions).
+
+#include<stdio.h>;
+#include<conio.h>;
+#include<malloc.h>;
+struct stack
+{
+int data;
+struct stack *next;
+};
+struct stack *top=NULL;
+struct stack *push(struct stack *, int);
+struct stack *display(struct stack *);
+struct stack *pop(struct stack *);
+int peek(struct stack *);
+int main()
+{
+int val,option;
+
+do
+{
+printf(&quot;\n 1.PUSH&quot;);
+printf(&quot;\n 2.POP&quot;);
+printf(&quot;\n 3.DISPLAY&quot;);
+printf(&quot;\nENTER YOUR CHOICE:&quot;);
+scanf(&quot;%d&quot;,&amp;option);
+
+switch(option)
+{
+case 1:
+printf(&quot;\nENTER THE VALUE TO BE PUSHED:\t&quot;);
+scanf(&quot;%d&quot;, &amp;val);
+top=push(top,val);
+break;
+case 2:
+top=pop(top);
+break;
+case 3:
+top=display(top);
+break;
+
+}
+}
+while(option!=4);
+return 0;
+
+}
+struct stack *push(struct stack *top, int val)
+{
+struct stack *ptr;
+ptr=(struct stack*)malloc(sizeof(struct stack));
+ptr-&gt;data=val;
+if(top==NULL)
+{
+ptr-&gt;next=NULL;
+top=ptr;
+}
+
+Else
+{
+ptr-&gt;next=top;
+top=ptr;
+}
+return top;
+}
+struct stack*display(struct stack *top)
+{
+struct stack *ptr;
+ptr=top;
+if(top==NULL)
+printf(&quot;\nSTACK IS EMPTY&quot;);
+else
+{
+while(ptr !=NULL)
+{
+printf(&quot;\n%d&quot;,ptr-&gt;data);
+ptr = ptr-&gt;next;
+}
+}
+
+return top;
+}
+struct stack *pop(struct stack *top)
+{
+struct stack *ptr;
+ptr = top;
+if(top ==NULL)
+printf(&quot;\nSTACK UNDERFLOW&quot;);
+else
+
+{
+top = top-&gt;next;
+printf(&quot;\nThe value being deleted is:%d &quot;,ptr-&gt;data);
+free(ptr);
+}
+
+return top;
+
+}
